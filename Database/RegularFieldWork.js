@@ -19,8 +19,8 @@ const regularFieldWorkSchema = new mongoose.Schema({
   briefReport: String,
   villageWiseKeyPersons: [String],
   contactNumbers: [String],
-  geoTaggedPhotos: [Buffer], // Store images as binary data (Buffer)
-  uploadPetrolBill: Buffer, // Store uploadPetrolBill as binary data (Buffer)
+  geoTaggedPhotos: [String], 
+  uploadPetrolBill: String, 
   vehicleNumber: String,
   openingReading: Number,
   closingReading: Number,

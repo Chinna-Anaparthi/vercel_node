@@ -10,8 +10,11 @@ const FieldworkPost = async (req, res) => {
         console.error('Error uploading files:', error);
         return res.status(500).json({ error: 'Error uploading files' });
       }
-      const image1 = req.files[0].buffer.toString('base64');
-      const image2 = req.files[1].buffer.toString('base64');
+
+      const images = req.files.filter(file => file.fieldname === 'geoTaggedPhotos')
+                              .map(file => file.buffer.toString('base64'));
+      
+      const petrolBillImage = req.files.find(file => file.fieldname === 'uploadPetrolBill');
 
       const {
         employeeId,
@@ -40,8 +43,8 @@ const FieldworkPost = async (req, res) => {
         briefReport,
         villageWiseKeyPersons,
         contactNumbers,
-        geoTaggedPhotos: [image1], // Store both images in an array
-        uploadPetrolBill: image2, // Store the petrol bill image in an array
+        geoTaggedPhotos: images,
+        uploadPetrolBill: petrolBillImage ? petrolBillImage.buffer.toString('base64') : null,
         vehicleNumber,
         openingReading,
         closingReading,
@@ -58,6 +61,7 @@ const FieldworkPost = async (req, res) => {
     res.status(500).json({ error: 'Error inserting data into MongoDB' });
   }
 };
+
 
 const FieldworkStatusUpdate = async (req, res) => {
     try {
