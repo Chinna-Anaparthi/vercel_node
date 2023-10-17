@@ -28,6 +28,6 @@ const regularFieldWorkSchema = new mongoose.Schema({
   status: String,
 });
 
-const RegularFieldWork = mongoose.model('RegularFieldWork', regularFieldWorkSchema);
+const RegularFieldWork = mongoose.model('RegularField', regularFieldWorkSchema);
 
 module.exports = RegularFieldWork;
